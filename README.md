@@ -2,6 +2,10 @@
 
 A safe TypeScript starter for building trading agents on AFX.
 
+## For AI Agents
+
+If you are an AI agent, read [AGENTS.md](./AGENTS.md) before setup or execution. It defines the safe testnet workflow, required environment variables, verification commands, and trading guardrails for this repository.
+
 This project is intentionally small. It shows how to:
 
 - load AFX agent configuration from environment variables
