@@ -12,7 +12,8 @@ This file is for AI coding agents and AI trader agents operating this repository
 - Default to dry-run mode.
 - Do not use mainnet unless the human explicitly asks for it.
 - Do not enable trading unless the human explicitly asks for testnet execution.
-- Do not invent, request in chat, print, commit, or persist private keys.
+- Do not request private keys for testnet onboarding. If keys are absent during testnet execution, create ephemeral wallets in memory.
+- Do not print, commit, or persist generated private keys.
 - Do not submit orders if `AFX_MAX_NOTIONAL_USDC` or `AFX_MAX_LEVERAGE` is missing.
 - Do not hardcode symbol codes. Resolve markets through live product metadata.
 
@@ -47,16 +48,14 @@ AFX_MAX_NOTIONAL_USDC=100
 AFX_MAX_LEVERAGE=3
 ```
 
-For testnet execution, the environment must also contain:
+For testnet execution, use:
 
 ```bash
-AFX_MASTER_PRIVATE_KEY=<provided outside the repo>
-AFX_AGENT_PRIVATE_KEY=<provided outside the repo>
 AFX_ENABLE_TRADING=true
 AFX_ORDER_PRICE=<explicit limit price>
 ```
 
-Never write private key values into this file, README, source code, test fixtures, logs, or commits.
+If `AFX_MASTER_PRIVATE_KEY` and `AFX_AGENT_PRIVATE_KEY` are absent, the starter will create ephemeral master and agent wallets in memory, claim testnet faucet funds, approve the agent wallet, and submit the guarded testnet order. Never write private key values into this file, README, source code, test fixtures, logs, or commits.
 
 ## Verification
 
@@ -86,8 +85,8 @@ Only after explicit human approval for testnet trading:
 
 1. Confirm `AFX_ENV=testnet`.
 2. Confirm `AFX_ENABLE_TRADING=true`.
-3. Confirm `AFX_MASTER_PRIVATE_KEY` and `AFX_AGENT_PRIVATE_KEY` are present in the environment or `.env`.
-4. Confirm `AFX_ORDER_PRICE`, `AFX_MAX_NOTIONAL_USDC`, and `AFX_MAX_LEVERAGE` are set.
+3. Confirm `AFX_ORDER_PRICE`, `AFX_MAX_NOTIONAL_USDC`, and `AFX_MAX_LEVERAGE` are set.
+4. If wallet keys are absent, allow the starter to create ephemeral testnet wallets automatically.
 5. Run:
 
 ```bash

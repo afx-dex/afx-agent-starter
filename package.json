@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@afx-dex/afx-js-sdk": "git+https://github.com/afx-dex/afx-js-sdk.git#main",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "ethers": "^6.15.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

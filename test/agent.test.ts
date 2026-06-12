@@ -32,6 +32,8 @@ function client() {
       })),
     },
     exchange: {
+      faucetClaim: vi.fn(),
+      approveAgent: vi.fn(),
       setLeverage: vi.fn(),
       placeOrder: vi.fn(),
     },
@@ -69,6 +71,24 @@ describe("runAgent", () => {
       ordType: "LIMIT",
       tif: "GTC",
     });
+  });
+
+  it("onboards an ephemeral testnet wallet before placing the first testnet order", async () => {
+    const fakeClient = client();
+    const lines: string[] = [];
+
+    const result = await runAgent({
+      config: { ...config, enableTrading: true },
+      client: fakeClient,
+      onboardTestnetWallet: true,
+      log: (line) => lines.push(line),
+    });
+
+    expect(result.mode).toBe("trading");
+    expect(fakeClient.exchange.faucetClaim).toHaveBeenCalledBefore(fakeClient.exchange.approveAgent);
+    expect(fakeClient.exchange.approveAgent).toHaveBeenCalledBefore(fakeClient.exchange.setLeverage);
+    expect(fakeClient.exchange.setLeverage).toHaveBeenCalledBefore(fakeClient.exchange.placeOrder);
+    expect(lines.join("\n")).toContain("Onboarding ephemeral testnet wallet");
   });
 
   it("blocks trading when risk fails", async () => {
