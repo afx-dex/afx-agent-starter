@@ -20,7 +20,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@afx-dex/afx-js-sdk": "github:afx-dex/afx-js-sdk#main",
+    "@afx-dex/afx-js-sdk": "git+https://github.com/afx-dex/afx-js-sdk.git#main",
     "dotenv": "^17.2.3"
   },
   "devDependencies": {

@@ -79,7 +79,7 @@ npm run dev
 This starter currently depends on the GitHub version of the AFX JavaScript SDK:
 
 ```json
-"@afx-dex/afx-js-sdk": "github:afx-dex/afx-js-sdk#main"
+"@afx-dex/afx-js-sdk": "git+https://github.com/afx-dex/afx-js-sdk.git#main"
 ```
 
 Once the SDK is published to npm, switch this dependency to the npm package version.
